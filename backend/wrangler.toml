@@ -1,0 +1,25 @@
+name = "backend"
+compatibility_date = "2024-09-12"
+compatibility_flags = [ "nodejs_compat" ]
+
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZmM5MDU0MTYtOGQxNS00ZTQwLWIxOGQtMjZjODVlM2EwMzY4IiwidGVuYW50X2lkIjoiNzk3MDczNTkwYTViYThlYWY4YTM0ZmNlMDk4MGJkMGIyZDBlZmE0MTJlMTQwZDAxMjM4YzAyNWYwYTZmNjYxNCIsImludGVybmFsX3NlY3JldCI6IjhkNTk3MjQyLWU1NzMtNDgwYS05MDhhLTYwOTM2YzYwMDJmOSJ9.xh8AC6D74lUo_8yrpPKz_anA6PMx1W_KEpoxygYP1rQ"
+DIRECT_URL="postgresql://learning_owner:z89ZvqluIbXp@ep-floral-forest-a5m3o5il.us-east-2.aws.neon.tech/learning?sslmode=require"
+JWT_SECRET="eyJhcGlfa2V5IjoiZmM5MDU0MTYtOGQxNS00ZT"
+
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "my-database"
+# database_id = ""
+
+# [ai]
+# binding = "AI"
