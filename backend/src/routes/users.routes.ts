@@ -1,10 +1,10 @@
-import { Hono } from 'hono'
 
+import { Hono } from 'hono'
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
-
-const prisma = new PrismaClient().$extends(withAccelerate())
 import { sign, decode, verify } from 'hono/jwt'
+import { signinUserSchema, signupUserSchema } from '@raahatctrack001/common'
+
 
 const userRouter = new Hono<{
   Bindings: {
@@ -21,7 +21,15 @@ userRouter.post('/signup', async (c)=>{
     }).$extends(withAccelerate())
   
     const body = await c.req.json()
-  
+    
+    const result = signupUserSchema.safeParse(body);
+    const { success } =  result;
+    if(!success){
+      const { errors } = result.error;
+      c.status(415);
+      return c.json({error: errors[0]});
+    }
+
     const user = await prisma.user.create({
       data: {
         username: body.username,
@@ -42,11 +50,20 @@ userRouter.post('/signup', async (c)=>{
   
   userRouter.post('/signin', async (c)=>{
     try {
-        const { username, password } = await c.req.json();
-        const prisma = new PrismaClient({
-          datasourceUrl: c.env.DATABASE_URL,
-        }).$extends(withAccelerate())
-      
+      const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+      }).$extends(withAccelerate())
+        const body = await c.req.json();
+        const {username, password} = body;
+
+        const result = signinUserSchema.safeParse(body);
+        const { success } =  result;
+        if(!success){
+          const { errors } = result.error;
+          c.status(415);
+          return c.json({error: errors[0]});
+        }
+        
         const currentUser = await prisma.user.findFirst({where: { username }});
         if(!currentUser){
             c.status(404);
