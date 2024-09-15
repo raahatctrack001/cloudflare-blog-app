@@ -13,6 +13,8 @@ const Signup = () => {
       <div className='bg-gray-200  w-full h-screen hidden lg:flex justify-center items-center px-5'>
         <Quote />
       </div>
+
+      
     </div>
   )
 }
